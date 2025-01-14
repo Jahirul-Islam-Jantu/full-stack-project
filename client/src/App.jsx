@@ -1,24 +1,21 @@
-import React from 'react';
+import {HashRouter, Route, Routes} from "react-router-dom";
+import HomePage from "./pages/HomePage.jsx";
+import LogIn from "./pages/LogIn.jsx";
+import SignUp from "./pages/SignUp.jsx";
+import Products from "./pages/Products.jsx";
+import AboutUs from "./pages/AboutUs.jsx";
 
 const App = () => {
     return (
-        <div>
-            <h1 className="text-3xl font-bold underline">
-                Hello world!
-            </h1>
-            <div className="hero bg-base-200 min-h-screen">
-                <div className="hero-content text-center">
-                    <div className="max-w-md">
-                        <h1 className="text-5xl font-bold">Hello there</h1>
-                        <p className="py-6">
-                            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
-                            quasi. In deleniti eaque aut repudiandae et a id nisi.
-                        </p>
-                        <button className="btn btn-primary">Get Started</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <HashRouter>
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/login" element={<LogIn/>} />
+                <Route path="/signUp" element={<SignUp/>} />
+                <Route path="/products" element={<Products/>} />
+                <Route path="/aboutus" element={<AboutUs/>} />
+            </Routes>
+        </HashRouter>
     );
 };
 
