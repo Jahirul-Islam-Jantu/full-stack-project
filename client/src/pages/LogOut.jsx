@@ -1,8 +1,10 @@
+import Layout from "../components/Layout.jsx";
+
 const LogOut = () => {
     return (
-        <div>
+        <Layout>
             <h1>LogOut</h1>
-        </div>
+        </Layout>
     );
 };
 

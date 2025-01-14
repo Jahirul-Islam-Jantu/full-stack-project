@@ -1,8 +1,10 @@
+import Layout from "../components/Layout.jsx";
+
 const AboutUs = () => {
     return (
-        <div>
+        <Layout>
             <h2>About Us</h2>
-        </div>
+        </Layout>
     );
 };
 

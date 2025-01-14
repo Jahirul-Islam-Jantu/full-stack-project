@@ -4,6 +4,7 @@ import LogIn from "./pages/LogIn.jsx";
 import SignUp from "./pages/SignUp.jsx";
 import Products from "./pages/Products.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
+import ContactPage from "./pages/ContactPage.jsx";
 
 const App = () => {
     return (
@@ -14,6 +15,7 @@ const App = () => {
                 <Route path="/signUp" element={<SignUp/>} />
                 <Route path="/products" element={<Products/>} />
                 <Route path="/aboutus" element={<AboutUs/>} />
+                <Route path="/contact" element={<ContactPage/>} />
             </Routes>
         </HashRouter>
     );

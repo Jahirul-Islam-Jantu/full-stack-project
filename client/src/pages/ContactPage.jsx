@@ -1,11 +1,11 @@
 import Layout from "../components/Layout.jsx";
 
-const Products = () => {
+const ContactPage = () => {
     return (
         <Layout>
-            <h1>Products</h1>
+            <h1>Contact Page</h1>
         </Layout>
     );
 };
 
-export default Products;
+export default ContactPage;
