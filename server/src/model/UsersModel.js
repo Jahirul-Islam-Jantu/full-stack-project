@@ -6,7 +6,7 @@ const UserSchema = mongoose.Schema({
     lastName: {type:String, required:true},
     phone: {type:String},
     img:{type:String},
-    password: {type:String, required:true}
+    password: {type:String}
 }, {timestamps: true, versionKey: false})
 
 const UserModel = mongoose.model("users", UserSchema)

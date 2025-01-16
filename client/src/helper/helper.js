@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 class FormHelper {
     getBase64(file) {
         return new Promise((resolve, reject) => {
@@ -12,6 +14,17 @@ class FormHelper {
 
         })
     }
+
+    SuccessMessage(message){
+        toast.success(message)
+    }
+    ErrorMessage(message){
+        toast.error(message)
+    }
+
+    IsEmpty(value){
+        return value.length === 0;
+    }
 }
 
-export const { getBase64 } = new FormHelper();
+export const { getBase64, SuccessMessage, ErrorMessage, IsEmpty } = new FormHelper();

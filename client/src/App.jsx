@@ -11,7 +11,7 @@ import {Toaster} from "react-hot-toast";
 const App = () => {
     return (
         <HashRouter>
-            <Toaster/>
+            <Toaster position="top-center" reverseOrder={false}/>
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LogIn/>} />

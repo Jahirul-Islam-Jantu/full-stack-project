@@ -1,8 +1,8 @@
 import {Link} from "react-router-dom";
 import {useRef, useState} from "react";
-import {getBase64} from "../helper/helper.js";
-import axios from "axios";
-import toast from "react-hot-toast";
+import {ErrorMessage, getBase64, IsEmpty, SuccessMessage} from "../helper/helper.js";
+import {registerUser, universalApi} from "../apiCalls/apiCalls.js";
+import * as result from "autoprefixer";
 
 const SignUpForm = () => {
 
@@ -31,15 +31,30 @@ const SignUpForm = () => {
             password: password,
             img: img,
         }
-        let URL = "http://localhost:3000/api/registerUser"
-        let result = await axios.post(URL, reqBody)
 
-        if (result.status === "Success"){
-            toast.success("User Successfully Registered!")
+        if (IsEmpty(email)) {
+            ErrorMessage("Email is Required")
+        } else if (IsEmpty(firstName)) {
+            ErrorMessage("First Name is Required")
+        } else if (IsEmpty(lastName)) {
+            ErrorMessage("Last Name is Required")
+        } else if (IsEmpty(phone)) {
+            ErrorMessage("Phone number is Required")
+        }else if (IsEmpty(img)) {
+            ErrorMessage("Image is Required")
         }
-        else{
-            toast.error("User already registered!")
+        else if (IsEmpty(password)) {
+            ErrorMessage("Passwords is Required")
+        } else{
+        // await registerUser(reqBody)
+            let user = await universalApi("registerUser", reqBody)
+            if (user.data.status === "Success"){
+                SuccessMessage(user.data.message)
+            }else{
+                ErrorMessage(user.data.message)
+            }
         }
+
 
     }
 
