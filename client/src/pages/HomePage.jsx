@@ -1,10 +1,10 @@
 import MasterLayOut from "../components/MasterLayOut.jsx";
+import Slider from "../components/Slider.jsx";
 
 const HomePage = () => {
     return (
         <MasterLayOut>
-
-            <h1>Home Page</h1>
+            <Slider/>
 
         </MasterLayOut>
     );
