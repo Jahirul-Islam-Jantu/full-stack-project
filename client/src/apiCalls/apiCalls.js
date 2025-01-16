@@ -30,9 +30,18 @@ class ApiCalls {
 
     }
 
+    async loginUser(reqBody) {
+        let result = await axios.post(`${baseURL}/login`, reqBody)
+        if (result.data.status === "Success"){
+            SuccessMessage(result.data.message)
+        }else{
+            ErrorMessage(result.data.message)
+        }
+    }
+
 
 
 
 }
 
-export const {registerUser, universalApi} = new ApiCalls( )
+export const {registerUser, universalApi, loginUser} = new ApiCalls( )

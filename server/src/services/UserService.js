@@ -1,4 +1,6 @@
 import UserModel from "../model/UsersModel.js";
+import {Cookie_ExpiresIn} from "../config/config.js";
+import {EncodeToken} from "../utils/tokenHelper.js";
 export const UserRegistrationService= async (req) => {
     try{
         let reqBody = req.body;
@@ -11,5 +13,40 @@ export const UserRegistrationService= async (req) => {
 
     }catch(err){
         return {status: "Error", error: err, message: "User creation failed"};
+    }
+}
+
+export const UserLogInService= async (req, res) => {
+    try{
+        let {email, password} = req.body;
+        let existingUser = await UserModel.findOne({email, password});
+        if (!existingUser) {
+            return {status: "Failed", message: "No User Found"};
+        }
+        let data = await UserModel.aggregate([
+            {$match: {email: email,password: password}},
+            {$project: {_id: 1 , email: 1}}
+        ])
+        if (data.length === 1) {
+            let token = EncodeToken(data[0]["email"]);
+
+
+            let options = {
+                maxAge: Cookie_ExpiresIn,
+                httpOnly: true,
+                sameSite: "none",
+                secure: true,
+
+            }
+
+            res.cookie("accessToken", token ,  options);
+
+            return {status: "Success", token: token, data: data[0],  message: "User Successfully Logged In"};
+        }else{
+            return {status: "Error", error: data[0]};
+        }
+
+    }catch(err){
+        return {status: "Error", error: err, message: "User Log In Failed"};
     }
 }

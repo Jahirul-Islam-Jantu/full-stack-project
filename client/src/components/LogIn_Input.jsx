@@ -1,6 +1,30 @@
 import {Link} from "react-router-dom";
+import {useState} from "react";
+import {ErrorMessage, IsEmpty} from "../helper/helper.js";
+import {loginUser} from "../apiCalls/apiCalls.js";
 
 const LogInInput = () => {
+    const [state, setState] = useState({email: "", password: ""});
+    console.log(state)
+
+    const submitHandler = async () => {
+        if (IsEmpty(state.email)) {
+            ErrorMessage("Email field is empty");
+        } else if (IsEmpty(state.password)) {
+            ErrorMessage("Password field is empty");
+        } else {
+            try {
+                let result = await loginUser(state);
+                if (result === true) {
+                    return {status: "Success", msg: "Login Successful"};
+                }
+            } catch (error) {
+                console.error("Error during login:", error);
+            }
+        }
+    }
+
+
     return (
         <div>
             <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -14,6 +38,7 @@ const LogInInput = () => {
                                 Email
                             </label>
                             <input
+                                onChange={(e) => setState({...state,email:e.target.value})}
                                 type="email"
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
                                 placeholder="your@email.com"
@@ -24,6 +49,7 @@ const LogInInput = () => {
                                 Password
                             </label>
                             <input
+                                onChange={(e) => setState({...state,password:e.target.value})}
                                 type="password"
                                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
                                 placeholder="••••••••"
@@ -42,6 +68,7 @@ const LogInInput = () => {
                             </a>
                         </div>
                         <button
+                            onClick = {submitHandler}
                             className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 rounded-lg transition-colors">
                             Sign In
                         </button>

@@ -5,6 +5,7 @@ const router = express.Router()
 
 // User Registration
 router.post("/registerUser", UserController.userRegistration);
+router.post("/login", UserController.userLogIn)
 
 
 
