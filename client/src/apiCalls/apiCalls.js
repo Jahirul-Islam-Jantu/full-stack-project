@@ -9,15 +9,25 @@ class ApiCalls {
 
         if (result.data.status === "Success"){
             SuccessMessage(result.data.message)
+            return true
         }
         else{
             ErrorMessage(result.data.message)
+            return false
         }
     }
 
     async universalApi(apiEndPoint, reqBody){
         let result = await axios.post(`${baseURL}/${apiEndPoint}`, reqBody)
-        return result
+        if (result.data.status === "Success"){
+            SuccessMessage(result.data.message)
+            return true
+        }else {
+            ErrorMessage(result.data.message)
+            return false;
+        }
+
+
     }
 
 

@@ -1,14 +1,12 @@
-import Layout from "../components/Layout.jsx";
-import Footer from "../components/Footer.jsx";
+
+import MasterLayOut from "../components/MasterLayOut.jsx";
 
 const AboutUs = () => {
     return (
-        <Layout>
+        <MasterLayOut>
             <h2>About Us</h2>
 
-        {/*    Footer Section   */}
-            <Footer/>
-        </Layout>
+        </MasterLayOut>
     );
 };
 

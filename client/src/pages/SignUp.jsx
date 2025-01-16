@@ -1,16 +1,14 @@
-import Layout from "../components/Layout.jsx";
-import Footer from "../components/Footer.jsx";
 import SignUpForm from "../components/SignUpForm.jsx";
+import MasterLayOut from "../components/MasterLayOut.jsx";
 
 const SignUp = () => {
     return (
-        <Layout>
+        <MasterLayOut>
            <SignUpForm/>
 
-            {/*    Footer Section   */}
-            <Footer/>
 
-        </Layout>
+
+        </MasterLayOut>
     );
 };
 

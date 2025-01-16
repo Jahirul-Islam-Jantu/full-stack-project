@@ -1,6 +1,6 @@
 import {Link, NavLink} from "react-router-dom";
 
-const Layout = (props) => {
+const Layout = () => {
     return (
         <div>
             <section className="bg-purple-50 shadow-md dark:bg-dark flex   h-[80px]">
@@ -30,7 +30,6 @@ const Layout = (props) => {
                     </div>
                 </div>
             </section>
-            {props.children}
         </div>
 
     );

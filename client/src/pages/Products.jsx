@@ -1,14 +1,11 @@
-import Layout from "../components/Layout.jsx";
-import Footer from "../components/Footer.jsx";
+import MasterLayOut from "../components/MasterLayOut.jsx";
 
 const Products = () => {
     return (
-        <Layout>
+        <MasterLayOut>
             <h1>Products</h1>
 
-            {/*    Footer Section   */}
-            <Footer/>
-        </Layout>
+        </MasterLayOut>
     );
 };
 

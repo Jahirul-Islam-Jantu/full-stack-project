@@ -24,12 +24,12 @@ const SignUpForm = () => {
         let img = Img;
 
         let reqBody = {
-            email: email,
-            firstName: firstName,
-            lastName: lastName,
-            phone: phone,
-            password: password,
-            img: img,
+             email,
+             firstName,
+             lastName,
+             phone,
+             password,
+             img,
         }
 
         if (IsEmpty(email)) {
@@ -46,12 +46,14 @@ const SignUpForm = () => {
         else if (IsEmpty(password)) {
             ErrorMessage("Passwords is Required")
         } else{
-        // await registerUser(reqBody)
-            let user = await universalApi("registerUser", reqBody)
-            if (user.data.status === "Success"){
-                SuccessMessage(user.data.message)
-            }else{
-                ErrorMessage(user.data.message)
+        let user = await registerUser(reqBody)
+        //     let user = await universalApi("registerUser", reqBody)
+            if (user === true){
+                emailRef.value = ""
+                fNameRef.value = ""
+                lNameRef.value = ""
+                phoneRef.value = ""
+                passwordRef.value = ""
             }
         }
 

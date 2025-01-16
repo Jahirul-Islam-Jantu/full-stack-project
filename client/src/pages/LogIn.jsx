@@ -1,15 +1,13 @@
-import Layout from "../components/Layout.jsx";
 import LogIn_Input from "../components/LogIn_Input.jsx";
-import Footer from "../components/Footer.jsx";
+import MasterLayOut from "../components/MasterLayOut.jsx";
 
 const LogIn = () => {
     return (
-        <Layout>
+        <MasterLayOut>
             <LogIn_Input/>
 
-            {/*    Footer Section   */}
-            <Footer/>
-        </Layout>
+
+        </MasterLayOut>
     );
 };
 

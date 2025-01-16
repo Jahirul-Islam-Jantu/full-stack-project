@@ -1,14 +1,12 @@
-import Layout from "../components/Layout.jsx";
-import Footer from "../components/Footer.jsx";
+import MasterLayOut from "../components/MasterLayOut.jsx";
 
 const LogOut = () => {
     return (
-        <Layout>
+        <MasterLayOut>
             <h1>LogOut</h1>
 
-            {/*    Footer Section   */}
-            <Footer/>
-        </Layout>
+
+        </MasterLayOut>
     );
 };
 
