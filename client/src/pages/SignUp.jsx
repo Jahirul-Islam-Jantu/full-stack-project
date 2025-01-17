@@ -1,14 +1,13 @@
 import SignUpForm from "../components/SignUpForm.jsx";
-import MasterLayOut from "../components/MasterLayOut.jsx";
 
 const SignUp = () => {
     return (
-        <MasterLayOut>
+        <div>
            <SignUpForm/>
 
 
 
-        </MasterLayOut>
+        </div>
     );
 };
 

@@ -13,9 +13,9 @@ const App = () => {
         <HashRouter>
             <Toaster position="top-center" reverseOrder={false}/>
             <Routes>
-                <Route path="/" element={<HomePage />} />
+                <Route path="/" element={<SignUp />} />
                 <Route path="/login" element={<LogIn/>} />
-                <Route path="/signUp" element={<SignUp/>} />
+                <Route path="/home" element={<HomePage/>} />
                 <Route path="/products" element={<Products/>} />
                 <Route path="/aboutus" element={<AboutUs/>} />
                 <Route path="/contact" element={<ContactPage/>} />
