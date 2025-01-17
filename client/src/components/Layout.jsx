@@ -1,6 +1,18 @@
 import {Link, NavLink} from "react-router-dom";
+import Cookies from "js-cookie";
+import {logOutUser} from "../apiCalls/apiCalls.js";
 
 const Layout = () => {
+    let isLogin = Cookies.get("token");
+
+    const onLogout = async () => {
+         let result = await logOutUser()
+        if (result) {
+            window.location.reload();
+        }
+    }
+
+
     return (
         <div>
             <section className="bg-purple-50 shadow-md dark:bg-dark flex   h-[80px]">
@@ -22,10 +34,20 @@ const Layout = () => {
                             </nav>
                         </div>
                         <div className="col-span-3">
-                            <div className=" flex  gap-[30px]" >
-                                <Link to="/login" className="bg-purple-700 text-white rounded-xl px-[1rem] py-[0.5rem]"> Log In </Link>
-                                <Link to="/signUp" className="bg-red-700 text-white rounded-xl px-[1rem] py-[0.5rem]">Sign Up </Link>
-                            </div>
+                            {
+                                !!isLogin === true ? (<div>
+                                    <Link onClick={onLogout}
+                                          className="bg-red-700 text-white rounded-xl px-[1rem] py-[0.5rem]">LogOut </Link>
+                                </div>) : (<div className=" flex  gap-[30px]">
+                                    <Link to="/login"
+                                          className="bg-purple-700 text-white rounded-xl px-[1rem] py-[0.5rem]"> Log
+                                        In </Link>
+                                    <Link to="/signUp"
+                                          className="bg-red-700 text-white rounded-xl px-[1rem] py-[0.5rem]">Sign
+                                        Up </Link>
+                                </div>)
+                            }
+
                         </div>
                     </div>
                 </div>

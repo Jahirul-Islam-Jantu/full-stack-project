@@ -6,11 +6,20 @@ import helmet from "helmet";
 import hpp from "hpp"
 import cookieParser from "cookie-parser"
 import router from ".//routes/api.js";
-import {MONGODB_CONNECTION, PORT, MAX_JSON_SIZE, URL_ENCODING, WEB_CACHE, REQUEST_LIMIT_NUMBER, REQUEST_LIMIT_TIME} from "../server/src/config/config.js"
+import {
+    MONGODB_CONNECTION,
+    PORT,
+    MAX_JSON_SIZE,
+    URL_ENCODING,
+    WEB_CACHE,
+    REQUEST_LIMIT_NUMBER,
+    REQUEST_LIMIT_TIME,
+    corsOptions
+} from "./src/config/config.js"
 
 const app = express();
 
-app.use(cors())
+app.use(cors(corsOptions))
 app.use(express.json({limit:MAX_JSON_SIZE}))
 app.use(express.urlencoded({extended:URL_ENCODING}))
 app.use(hpp())

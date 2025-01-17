@@ -33,13 +33,13 @@ export const UserLogInService= async (req, res) => {
 
             let options = {
                 maxAge: Cookie_ExpiresIn,
-                httpOnly: true,
+                httpOnly: false, // if we set false here it will allow all browser to get the cookie
                 sameSite: "none",
                 secure: true,
-
+                path: "/"
             }
 
-            res.cookie("accessToken", token ,  options);
+            res.cookie("token", token ,  options);
 
             return {status: "Success", token: token, data: data[0],  message: "User Successfully Logged In"};
         }else{
@@ -48,5 +48,15 @@ export const UserLogInService= async (req, res) => {
 
     }catch(err){
         return {status: "Error", error: err, message: "User Log In Failed"};
+    }
+}
+
+export const UserLogOutService= async (req, res) => {
+    try{
+        res.clearCookie("token");
+        return {status: "Success", message: "LogOut Successfully"};
+
+    }catch(err){
+        return {status: "Error", error: err};
     }
 }

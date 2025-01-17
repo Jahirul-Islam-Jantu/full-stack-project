@@ -5,6 +5,10 @@ export const JWT_SECRET =
 export const JWT_EXPIRATION_DURATION = 60 * 60 * 24 * 7 * 1000; // It will use to encode or decode JWT Token.
 
 export const Cookie_ExpiresIn = 60 * 60 * 24 * 7 * 1000;
+export const corsOptions = {
+    origin: "http://localhost:5173", // Replace with your frontend URL
+    credentials: true,              // Allow cookies to be sent
+};
 
 // export const EMAIL_HOST = "smtp.gmail.com"
 // export const EMAIL_PORT = 465

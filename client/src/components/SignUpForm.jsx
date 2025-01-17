@@ -1,10 +1,11 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useRef, useState} from "react";
 import {ErrorMessage, getBase64, IsEmpty, SuccessMessage} from "../helper/helper.js";
 import {registerUser, universalApi} from "../apiCalls/apiCalls.js";
 import * as result from "autoprefixer";
 
 const SignUpForm = () => {
+    let navigate = useNavigate();
 
     let {emailRef, fNameRef, lNameRef, phoneRef,  passwordRef} = useRef()
     let [Img, setImg] = useState("")
@@ -48,12 +49,15 @@ const SignUpForm = () => {
         } else{
         let user = await registerUser(reqBody)
         //     let user = await universalApi("registerUser", reqBody)
-            if (user === true){
-                emailRef.value = ""
-                fNameRef.value = ""
-                lNameRef.value = ""
-                phoneRef.value = ""
-                passwordRef.value = ""
+        //     if (user === true){
+        //         emailRef.value = ""
+        //         fNameRef.value = ""
+        //         lNameRef.value = ""
+        //         phoneRef.value = ""
+        //         passwordRef.value = ""
+        //     }
+            if (user){
+                navigate("/login")
             }
         }
 

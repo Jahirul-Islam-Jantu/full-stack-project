@@ -1,4 +1,4 @@
-import {UserLogInService, UserRegistrationService} from "../services/UserService.js";
+import {UserLogInService, UserLogOutService, UserRegistrationService} from "../services/UserService.js";
 
 // Registration Service
 export const userRegistration = async (req, res) => {
@@ -9,5 +9,11 @@ export const userRegistration = async (req, res) => {
 // LogIn service
 export const userLogIn = async (req, res) => {
     let result = await UserLogInService(req, res);
+    return res.json(result);
+}
+
+// LogOut service
+export const userLogOut = async (req, res) => {
+    let result = await UserLogOutService(req, res);
     return res.json(result);
 }

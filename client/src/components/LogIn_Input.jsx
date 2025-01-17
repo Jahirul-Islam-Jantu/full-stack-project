@@ -1,11 +1,11 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {ErrorMessage, IsEmpty} from "../helper/helper.js";
 import {loginUser} from "../apiCalls/apiCalls.js";
 
 const LogInInput = () => {
+    let navigate = useNavigate();
     const [state, setState] = useState({email: "", password: ""});
-    console.log(state)
 
     const submitHandler = async () => {
         if (IsEmpty(state.email)) {
@@ -16,10 +16,12 @@ const LogInInput = () => {
             try {
                 let result = await loginUser(state);
                 if (result === true) {
+                    // window.location.href = "/"
+                    navigate("/");
                     return {status: "Success", msg: "Login Successful"};
                 }
             } catch (error) {
-                console.error("Error during login:", error);
+                return {status: "Error", error: error};
             }
         }
     }
