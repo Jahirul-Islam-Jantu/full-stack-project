@@ -6,7 +6,6 @@ import Products from "./pages/Products.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 import {Toaster} from "react-hot-toast";
-import PrivetRoute from "./components/PrivateRoute.jsx";
 import DashBoard from "./pages/DashBoard.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 
