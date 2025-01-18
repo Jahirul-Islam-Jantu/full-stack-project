@@ -1,20 +1,28 @@
 import {Link, NavLink} from "react-router-dom";
 import Cookies from "js-cookie";
 import {logOutUser} from "../apiCalls/apiCalls.js";
+import {useState} from "react";
+import Loader from "./Loader.jsx";
 
 const Layout = () => {
+
+    const [loading, setLoading] = useState(false);
     let isLogin = Cookies.get("token");
 
     const onLogout = async () => {
+        setLoading(true);
          let result = await logOutUser()
         if (result) {
             window.location.href = "/";
+            setLoading(false);
         }
     }
 
 
     return (
-        <div>
+
+        <section>
+            {loading && <Loader/>}
             <section className="bg-purple-50 shadow-md dark:bg-dark flex   h-[80px]">
                 <div className="container mx-auto">
                     <div className="grid grid-cols-12 gap-[30px] items-center">
@@ -52,7 +60,7 @@ const Layout = () => {
                     </div>
                 </div>
             </section>
-        </div>
+        </section>
 
     );
 };

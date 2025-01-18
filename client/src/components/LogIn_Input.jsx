@@ -2,10 +2,13 @@ import {Link, useNavigate} from "react-router-dom";
 import {useState} from "react";
 import {ErrorMessage, IsEmpty} from "../helper/helper.js";
 import {loginUser} from "../apiCalls/apiCalls.js";
+import Loader from "./Loader.jsx";
 
 const LogInInput = () => {
     let navigate = useNavigate();
     const [state, setState] = useState({email: "", password: ""});
+
+    const [loading, setLoading] = useState(false);
 
     const submitHandler = async () => {
         if (IsEmpty(state.email)) {
@@ -14,12 +17,18 @@ const LogInInput = () => {
             ErrorMessage("Password field is empty");
         } else {
             try {
+                setLoading(true);
                 let result = await loginUser(state);
                 if (result === true) {
                     // window.location.href = "/"
                     navigate("/");
+
+                    setLoading(false);
                     return {status: "Success", msg: "Login Successful"};
+                }else{
+                    setLoading(false);
                 }
+
             } catch (error) {
                 return {status: "Error", error: error};
             }
@@ -30,6 +39,7 @@ const LogInInput = () => {
     return (
         <div>
             <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+                {loading && <Loader /> }
                 <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
                     <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
                         Sign In

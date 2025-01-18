@@ -1,10 +1,11 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useRef, useState} from "react";
-import {ErrorMessage, getBase64, IsEmpty, SuccessMessage} from "../helper/helper.js";
-import {registerUser, universalApi} from "../apiCalls/apiCalls.js";
-import * as result from "autoprefixer";
+import {ErrorMessage, getBase64, IsEmpty} from "../helper/helper.js";
+import {registerUser} from "../apiCalls/apiCalls.js";
+import Loader from "./Loader.jsx";
 
 const SignUpForm = () => {
+    const [loading, setLoading] = useState(false);
     let navigate = useNavigate();
 
     let {emailRef, fNameRef, lNameRef, phoneRef,  passwordRef} = useRef()
@@ -47,6 +48,7 @@ const SignUpForm = () => {
         else if (IsEmpty(password)) {
             ErrorMessage("Passwords is Required")
         } else{
+            setLoading(true);
         let user = await registerUser(reqBody)
         //     let user = await universalApi("registerUser", reqBody)
         //     if (user === true){
@@ -58,6 +60,7 @@ const SignUpForm = () => {
         //     }
             if (user){
                 navigate("/login")
+                setLoading(false);
             }
         }
 
@@ -69,6 +72,7 @@ const SignUpForm = () => {
     return (
         <section>
             <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+                {loading && <Loader/>}
                 <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
                     <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
                         Sign In
