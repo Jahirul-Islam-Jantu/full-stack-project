@@ -6,6 +6,7 @@ import Products from "./pages/Products.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 import {Toaster} from "react-hot-toast";
+import PrivateRoute from "./components/PrivateRoute.jsx";
 
 
 const App = () => {
@@ -13,12 +14,12 @@ const App = () => {
         <HashRouter>
             <Toaster position="top-center" reverseOrder={false}/>
             <Routes>
-                <Route path="/" element={<SignUp />} />
+                <Route path="/" element={<PrivateRoute> <HomePage /> </PrivateRoute> } />
                 <Route path="/login" element={<LogIn/>} />
-                <Route path="/home" element={<HomePage/>} />
-                <Route path="/products" element={<Products/>} />
-                <Route path="/aboutus" element={<AboutUs/>} />
-                <Route path="/contact" element={<ContactPage/>} />
+                <Route path="/signUp" element={<SignUp/>} />
+                <Route path="/products" element={<PrivateRoute>  <Products/> </PrivateRoute> } />
+                <Route path="/aboutus" element={ <PrivateRoute>  <AboutUs/> </PrivateRoute> } />
+                <Route path="/contact" element={ <PrivateRoute>  <ContactPage/>  </PrivateRoute> } />
             </Routes>
         </HashRouter>
     );

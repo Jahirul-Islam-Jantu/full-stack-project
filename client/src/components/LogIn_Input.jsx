@@ -17,7 +17,7 @@ const LogInInput = () => {
                 let result = await loginUser(state);
                 if (result === true) {
                     // window.location.href = "/"
-                    navigate("/home");
+                    navigate("/");
                     return {status: "Success", msg: "Login Successful"};
                 }
             } catch (error) {
