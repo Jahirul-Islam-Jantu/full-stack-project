@@ -52,9 +52,53 @@ class ApiCalls {
         }
     }
 
+    async createProduct(reqBody) {
+        let result = await axios.post(`${baseURL}/createProduct`, reqBody, { withCredentials: true })
+
+        if (result.data.status === "Success"){
+            SuccessMessage(result.data.message)
+            return true
+        }
+        else{
+            ErrorMessage(result.data.message)
+            return false
+        }
+    }
+
+    async uploadFiles(reqBody) {
+        const result = await axios.post(
+                    `${baseURL}/file-upload`,
+                    reqBody,
+                    { headers: { "Content-Type": "multipart/form-data" } }
+                );
+
+
+        if (result){
+            SuccessMessage(result.data.message)
+            return result
+        }
+        else{
+            ErrorMessage(result.data.message)
+            return false
+        }
+    }
+
+    async  getAllProduct() {
+        let result = await axios.get(`${baseURL}/getProducts`)
+
+        if (result.data.status === "Success"){
+            return result?.data?.data
+        }
+        else{
+            ErrorMessage(result.data.message)
+            return false
+        }
+    }
+
+
 
 
 
 }
 
-export const {registerUser, universalApi, loginUser, logOutUser} = new ApiCalls( )
+export const {registerUser, universalApi, loginUser, logOutUser, createProduct, uploadFiles, getAllProduct} = new ApiCalls( )

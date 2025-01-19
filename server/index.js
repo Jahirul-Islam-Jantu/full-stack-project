@@ -40,6 +40,9 @@ mongoose.connect(MONGODB_CONNECTION, {autoIndex: true}).then(()=>{
 // set Api
 app.use("/api", router)
 
+// file Upload
+app.use("/upload-file", express.static("uploads"))
+
 // run app
 app.listen(PORT || 3030, ()=>{
     console.log(`app running on port ${PORT}`)
