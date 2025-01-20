@@ -53,7 +53,7 @@ class ApiCalls {
     }
 
     async createProduct(reqBody) {
-        let result = await axios.post(`${baseURL}/createProduct`, reqBody, { withCredentials: true })
+        let result = await axios.post(`${baseURL}/createProduct`, reqBody)
 
         if (result.data.status === "Success"){
             SuccessMessage(result.data.message)

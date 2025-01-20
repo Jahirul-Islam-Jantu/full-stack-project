@@ -23,7 +23,7 @@ app.use(cors(corsOptions))
 app.use(express.json({limit:MAX_JSON_SIZE}))
 app.use(express.urlencoded({extended:URL_ENCODING}))
 app.use(hpp())
-app.use(helmet())
+app.use(helmet({crossOriginResourcePolicy:false}))
 app.use(cookieParser())
 
 // Rate limiter
@@ -41,7 +41,7 @@ mongoose.connect(MONGODB_CONNECTION, {autoIndex: true}).then(()=>{
 app.use("/api", router)
 
 // file Upload
-app.use("/upload-file", express.static("uploads"))
+app.use('/file-upload', express.static('uploads'));
 
 // run app
 app.listen(PORT || 3030, ()=>{

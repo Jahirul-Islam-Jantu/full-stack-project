@@ -16,7 +16,6 @@ const DashboardComponent = () => {
             setProducts(result)
         })()
     }, []);
-    console.log(products)
 
     let [file, setFile] = useState()
     const [data, setData] = useState({productName: "", productDes: "", productPrice: "", img: ""})
@@ -25,10 +24,10 @@ const DashboardComponent = () => {
         e.preventDefault()
         const formData = new FormData()
         formData.append("file", file)
-        const result =  await uploadFiles(formData)
+        const result = await uploadFiles(formData)
         setData({...data, img: result?.data?.file?.[0]?.filename})
-    }
 
+    }
     let submitData = async () => {
         if (IsEmpty(data.productName)){
          ErrorMessage("Product Name Required")
@@ -88,8 +87,7 @@ const DashboardComponent = () => {
                                     />
                                     <form className="flex w-full gap-3" onSubmit={handleFileUpload}>
                                         <input
-                                            className="w-full rounded-lg p-4 pe-12 text-sm shadow-sm border focus:ring-purple-400 "
-                                            name={file}
+                                            className="w-full rounded-lg p-4 pe-12 text-sm shadow-sm border focus:ring-purple-400"
                                             type="file"
                                             onChange={(e) => setFile(e.target.files[0])}
                                             accept="image/*"
@@ -119,8 +117,8 @@ const DashboardComponent = () => {
                     <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                             <thead
-                                className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <tr >
+                                className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
+                            <tr>
 
                                 <th scope="col" className="px-6 py-3">
                                     Product Name
@@ -132,7 +130,10 @@ const DashboardComponent = () => {
                                     Price
                                 </th>
                                 <th scope="col" className="px-16 py-3">
-                                    <span>Product Image</span>
+                                    Product Image
+                                </th>
+                                <th scope="col" className="px-6 py-3">
+                                    Action
                                 </th>
                             </tr>
                             </thead>
@@ -140,20 +141,25 @@ const DashboardComponent = () => {
                             {
                                 products?.map((item, index)=> (
                                     <tr key={index}
-                                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        className=" bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-                                        <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                                        <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center">
                                             {item?.productName}
                                         </td>
-                                        <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                                        <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center">
                                             {item?.productDes}
                                         </td>
 
-                                        <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
+                                        <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center">
                                             {item?.productPrice}
                                         </td>
-                                        <td className="p-4">
-                                            {`${baseUrl}/${item?.img}`}
+                                        <td className="p-4 flex items-center justify-center">
+                                            <img src={`${baseUrl}/${item?.img}`} alt={item?.productName}
+                                                 className="w-[100px] h-[100px] object-cover "/>
+                                        </td>
+                                        <td className="px-6 py-4 text-center">
+                                            <a href="#"
+                                               className="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a>
                                         </td>
 
                                     </tr>))
