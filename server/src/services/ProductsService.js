@@ -21,3 +21,14 @@ export const getProductService= async (req) => {
         return {status: "Error", error: err, message: "No Products"};
     }
 }
+
+export const deleteProductService= async (req) => {
+    try{
+        let id =  req.params.id;
+         let result =  await ProductModel.deleteOne({_id: id});
+        return {status: "Success", data: result };
+
+    }catch(err){
+        return {status: "Error", error: err, message: "No Products"};
+    }
+}

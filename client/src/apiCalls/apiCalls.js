@@ -1,5 +1,5 @@
 import axios from "axios";
-import {ErrorMessage, SuccessMessage} from "../helper/helper.js";
+import {DeleteAlert, ErrorMessage, SuccessMessage} from "../helper/helper.js";
 
 const baseURL = "http://localhost:3000/api"
 
@@ -95,10 +95,27 @@ class ApiCalls {
         }
     }
 
+    async  deleteProduct (id) {
+        let IsConfirm = await DeleteAlert()
+        if (IsConfirm){
+        let result = await axios.delete(`${baseURL}/deleteProduct/`+ id)
+            console.log(result)
+            if (result.data.status === "Success"){
+                return result
+            }
+            else{
+                ErrorMessage(result.data.message)
+                return false
+            }
+
+        }
+
+
+    }
 
 
 
 
 }
 
-export const {registerUser, universalApi, loginUser, logOutUser, createProduct, uploadFiles, getAllProduct} = new ApiCalls( )
+export const {registerUser, universalApi, loginUser, logOutUser, createProduct, uploadFiles, getAllProduct , deleteProduct} = new ApiCalls( )

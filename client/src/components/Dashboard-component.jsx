@@ -2,9 +2,11 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import {useEffect, useState} from "react";
 import {ErrorMessage, IsEmpty, SuccessMessage} from "../helper/helper.js";
-import {createProduct, getAllProduct, uploadFiles} from "../apiCalls/apiCalls.js";
+import {createProduct, deleteProduct, getAllProduct, uploadFiles} from "../apiCalls/apiCalls.js";
+import {useNavigate} from "react-router-dom";
 
 const DashboardComponent = () => {
+    let navigate = useNavigate();
 
     let baseUrl= "http://localhost:3000/file-upload"
 
@@ -40,12 +42,23 @@ const DashboardComponent = () => {
         }
 
          await createProduct(data)
+        window.location.reload()
 
     }
 
+    let deleteHandler = async (id) => {
+        const result = await deleteProduct(id);
+        console.log(result, "delete handler")
+        if (result) {
+            // Filter out the deleted product from the products state
+            setProducts(products.filter(product => product._id !== id));
+            console.log("products set", products)
+        }
+    };
 
 
-  return (
+
+    return (
     <div className="flex flex-col gap-10">
       <div className="container-fluid w-full mx-auto bg-zinc-300">
         <h2 className="text-gray-700  text-4xl font-bold text-center p-4">
@@ -155,11 +168,11 @@ const DashboardComponent = () => {
                                         </td>
                                         <td className="p-4 flex items-center justify-center">
                                             <img src={`${baseUrl}/${item?.img}`} alt={item?.productName}
-                                                 className="w-[100px] h-[100px] object-cover "/>
+                                                 className="w-[150px] h-[150px] object-cover "/>
                                         </td>
                                         <td className="px-6 py-4 text-center">
-                                            <a href="#"
-                                               className="font-medium text-red-600 dark:text-red-500 hover:underline">Remove</a>
+                                            <span onClick={()=>deleteHandler(item?._id)}
+                                               className="cursor-pointer font-medium text-red-600 dark:text-red-500 hover:underline">Remove</span>
                                         </td>
 
                                     </tr>))
